@@ -1,28 +1,37 @@
 /**
  * Created by moyu on 2017/2/25.
  */
-import {observable, computed, action, useStrict} from 'mobx';
+import {observable, computed, action, useStrict, toJS} from 'mobx';
 import CommentState from './Comment';
 
 useStrict(true);
-
 class CommentListState {
+    @observable comments = [new CommentState({author: 'auth', date: 'date', content: 'content'})];
 
-    @observable comments = [];
+    toJSON() {
+        return toJS(this.comments);
+    }
+    constructor(comments) {
+        if (comments) {
+            this.set(comments);
+        }
+    }
 
-    constructor(comments=[]) {
-        this.comments = comments.map(comment => new CommentState(comment));
+    get() {
+        return this.comments;
     }
 
     @action del(index) {
         this.comments.splice(index, 1);
     }
 
-
+    @action set(list) {
+        this.comments = list.map(x => new CommentState(x))
+    }
 
     @action fetch() {
         setTimeout(() => {
-            this.comments = new CommentListState([{author: 'John', date: '123', content: 'hahahaha'}]).comments
+            this.push([{author: 'John', date: '123', content: 'hahahaha'}]);
         }, 1000);
     }
 

@@ -1,12 +1,29 @@
 /**
  * Created by moyu on 2017/2/25.
  */
-import CommentList from './Comments'
+import CommentList from './Comments';
+import {observable, computed, action, useStrict, toJS} from 'mobx';
 
-const stores =  {
-    comments: new CommentList()
+useStrict(true);
+class Store {
+    comments = new CommentList();
+
+    constructor() {
+
+    }
+
+    fetch() {
+        this.comments.fetch();
+    }
+
+    get() {
+        return {
+            comments: this.comments
+        }
+    }
 }
 
-stores.comments.fetch();
+const store = new Store();
+store.fetch();
 
-export default stores;
+export default store;

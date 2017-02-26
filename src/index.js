@@ -9,7 +9,7 @@ import {observer, extendObservable, Provider} from 'mobx-react';
 const reRender = (Root=Router) => {
     console.log(Root);
     render(
-        <Provider {...stores}>
+        <Provider {...stores.get()}>
             {Root}
         </Provider>,
         document.getElementById('root')

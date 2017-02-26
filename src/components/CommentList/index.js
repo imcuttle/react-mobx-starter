@@ -12,22 +12,29 @@ class CommentList extends React.Component {
     }
 
     componentWillMount() {
+        // alert('willmount');
     }
 
     componentDidMount() {
+        // alert('didmount');
     }
 
     componentWillReceiveProps(newProps) {
+        // alert('receive');
     }
 
     componentWillUpdate(newProps, newState, newContext) {
+        // alert('willupdate');
     }
 
     componentDidUpdate(oldProps, oldState, oldContext) {
+        // alert('didupdate');
     }
 
     componentWillUnmount() {
+        // alert('unmount');
     }
+
 
     static defaultProps = {
         comments: []
@@ -39,7 +46,7 @@ class CommentList extends React.Component {
         const {comments} = this.props;
         return (
             <ul className={css.main}>
-                {comments && comments.comments.map((comment, index) =>
+                {comments && comments.get().map((comment, index) =>
                     <Comment key={index} store={comment} onDelete={() => {comments.del(index)} }/>
                 )}
             </ul>
