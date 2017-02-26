@@ -18,7 +18,7 @@ class MainPage extends React.Component {
     render() {
         return (
             <main>
-                <h1>Welcome!</h1>
+                <CommentList />
             </main>
         )
     }

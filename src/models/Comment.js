@@ -15,13 +15,6 @@ export default class CommentState {
         return `${this.author} at ${this.date}: ${this.content}`;
     }
 
-    @action remove() {
-        delete this.author;
-        delete this.date;
-        delete this.content;
-        delete this;
-    }
-
     constructor({author, date, content}) {
         this.author = author;
         this.date = date;

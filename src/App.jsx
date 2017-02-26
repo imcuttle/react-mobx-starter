@@ -1,23 +1,26 @@
 import React, {Component} from 'react';
-import {observer, extendObservable, Provider} from 'mobx-react';
 import {isDevMode} from '_utils';
 import DevTools from 'mobx-react-devtools';
-import stores from 'models';
+import {Link} from 'react-router';
 
 class App extends Component {
     render() {
-        const {children, store, ...rest} = this.props;
+        const {children, ...rest} = this.props;
         return (
-            <Provider {...stores}>
-                <div>
+            <div>
+                <header>
+                    <ul>
+                        <li><Link to="/">Index</Link></li>
+                        <li><Link to="/comments">Comments</Link></li>
+                    </ul>
+                </header>
                 {
                     React.Children.map(children, (child, index) =>
                         React.cloneElement(child, ...rest)
                     )
                 }
                 { isDevMode && <DevTools /> }
-                </div>
-            </Provider>
+            </div>
         );
     }
 }

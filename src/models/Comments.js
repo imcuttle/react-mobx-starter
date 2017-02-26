@@ -1,8 +1,10 @@
 /**
  * Created by moyu on 2017/2/25.
  */
-import {observable, computed, action} from 'mobx';
-import CommentState from './CommentState';
+import {observable, computed, action, useStrict} from 'mobx';
+import CommentState from './Comment';
+
+useStrict(true);
 
 class CommentListState {
 
@@ -12,11 +14,11 @@ class CommentListState {
         this.comments = comments.map(comment => new CommentState(comment));
     }
 
-    @action
-    del(index) {
-        this.comments[index].remove();
+    @action del(index) {
         this.comments.splice(index, 1);
     }
+
+
 
     @action fetch() {
         setTimeout(() => {
@@ -24,8 +26,7 @@ class CommentListState {
         }, 1000);
     }
 
-    @action
-    push(list) {
+    @action push(list) {
         this.comments.push(...new CommentListState(list).comments);
     }
 

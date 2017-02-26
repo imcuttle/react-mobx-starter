@@ -1,25 +1,27 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
-import App from './App';
+import Router from './router';
+import stores from 'models';
+import {observer, extendObservable, Provider} from 'mobx-react';
 
-import MainPage from 'pages/MainPage'
 
-const reRender = (Root=App) => {
+const reRender = (Root=Router) => {
+    console.log(Root);
     render(
-        <Root >
-            <MainPage />
-        </Root>,
+        <Provider {...stores}>
+            {Root}
+        </Provider>,
         document.getElementById('root')
     );
 };
 
-reRender(App);
+reRender(Router);
 
 
 if (module.hot) {
-    module.hot.accept('./App', () => {
-        const NextApp = require('./App').default;
+    module.hot.accept('./router', () => {
+        const NextApp = require('./router').default;
         reRender(NextApp);
     });
 }
